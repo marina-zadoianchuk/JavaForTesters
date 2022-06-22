@@ -1,5 +1,5 @@
 package lesson7;
-//
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lesson7.entity.Weather;
 import okhttp3.HttpUrl;
