@@ -1,5 +1,5 @@
 package lesson7;
-
+//
 import lesson7.entity.Weather;
 
 import java.io.Reader;
