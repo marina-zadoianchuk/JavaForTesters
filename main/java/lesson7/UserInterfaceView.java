@@ -1,5 +1,5 @@
 package lesson7;
-//
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -19,7 +19,7 @@ public class UserInterfaceView {
             }
             System.out.println("Введите 1 для получения погоды на сегодня; " +
                     "Введите 5 для прогноза на 5 дней; " +
-                 //   "Введите 2 для получения данных из базы; " +
+                     "Введите 2 для получения данных из базы; " +
                     "Для выхода введите 0:");
 
             String command = scanner.nextLine();

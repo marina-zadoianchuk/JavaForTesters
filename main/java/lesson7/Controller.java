@@ -22,11 +22,10 @@ public class Controller {
                 weatherModel.getWeather(selectedCity, Period.NOW);
                 break;
             case FIVE_DAYS:
-                // throw new IOException("РњРµС‚РѕРґ РЅРµ СЂРµР°Р»РёР·РѕРІР°РЅ!");
                 weatherModel.getWeather(selectedCity, Period.FIVE_DAYS);
-          //  case DB:
+            case DB:
            //     throw new IOException("Этот метод пока не реализован!");
-               // weatherModel.getSavedToDBWeather();
+                weatherModel.getSavedToDBWeather();
         }
     }
 }
