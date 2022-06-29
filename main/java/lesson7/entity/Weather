@@ -1,5 +1,5 @@
 package lesson7.entity;
-
+//
 public class Weather {
     private String city;
     private String localDate;

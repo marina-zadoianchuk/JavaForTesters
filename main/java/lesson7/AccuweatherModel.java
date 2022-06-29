@@ -1,5 +1,5 @@
 package lesson7;
-//
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lesson7.entity.Weather;
 import okhttp3.HttpUrl;
@@ -8,6 +8,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class AccuweatherModel implements WeatherModel {
@@ -72,9 +73,12 @@ public class AccuweatherModel implements WeatherModel {
                 String maxTemperature = objectMapper.readTree(weatherResponseOneDay).at("/DailyForecasts").get(0).at("/Temperature/Maximum/Value").asText();
                 String unit = objectMapper.readTree(weatherResponseOneDay).at("/DailyForecasts").get(0).at("/Temperature/Minimum/Unit").asText();
                 System.out.println("Погода в городе " + city + " на " + dateShort + " от " + minTemperature + " до " + maxTemperature + " градусов " + unit);
-
-
-               break;
+                try {
+                    dataBaseRepository.saveWeatherToDataBase(new Weather(city, dateShort, minTemperature, maxTemperature));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
             case FIVE_DAYS:
                 //TODO*: реализовать вывод погоды на 5 дней
                 HttpUrl httpUrlFiveDays = new HttpUrl.Builder()
@@ -106,7 +110,24 @@ public class AccuweatherModel implements WeatherModel {
                     String maxTemperature5 = objectMapper.readTree(weatherResponseFiveDays).at("/DailyForecasts").get(i).at("/Temperature/Maximum/Value").asText();
                     String unit5 = objectMapper.readTree(weatherResponseFiveDays).at("/DailyForecasts").get(i).at("/Temperature/Minimum/Unit").asText();
                     System.out.println("Погода в городе " + city5 + " на " + dateShort5 + " от " + minTemperature5 + " до " + maxTemperature5 + " градусов " + unit5);
+                    try
+                    {
+                        dataBaseRepository.saveWeatherToDataBase(new Weather(
+                                city5,  dateShort5, minTemperature5, maxTemperature5));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
+             /*   for (int i = 0; i < 5; i++)
+                {
+                    try
+                    {
+                        dataBaseRepository.saveWeatherToDataBase(new Weather(
+                                selectedCity,  minTemperature, maxTemperature));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }*/
                     break;
         }
     }
